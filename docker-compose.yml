@@ -1,0 +1,16 @@
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: profile-ui
+    entrypoint: ["/opt/scripts/build_ui.sh"]
+    working_dir: /opt
+    env_file: .env
+    ports:
+      - "5173:5173"
+      - "4173:4173"
+    volumes:
+      - type: bind
+        source: .
+        target: /opt
