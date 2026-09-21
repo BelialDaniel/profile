@@ -1,27 +1,43 @@
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 
-export function ParticleField() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+let persistentCanvas: HTMLCanvasElement | null = null
+let sceneMounted = false
 
+function ensureParticleCanvas() {
+  if (persistentCanvas?.isConnected) {
+    return persistentCanvas
+  }
+
+  const existing = document.querySelector("canvas.particle-field")
+  if (existing instanceof HTMLCanvasElement) {
+    persistentCanvas = existing
+    return persistentCanvas
+  }
+
+  const canvas = document.createElement("canvas")
+  canvas.className = "particle-field"
+  canvas.setAttribute("aria-hidden", "true")
+  document.body.prepend(canvas)
+  persistentCanvas = canvas
+  return canvas
+}
+
+export function ParticleField({ hidden = false }: { hidden?: boolean }) {
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const canvas = ensureParticleCanvas()
+    canvas.classList.toggle("is-hidden", hidden)
 
-    let disposed = false
-    let dispose: (() => void) | undefined
-
-    void import("~/lib/particle-scene").then(({ mountParticleScene }) => {
-      if (disposed || !canvasRef.current) return
-      dispose = mountParticleScene(canvas)
-    })
-
-    return () => {
-      disposed = true
-      dispose?.()
+    if (sceneMounted) {
+      return
     }
-  }, [])
 
-  return (
-    <canvas ref={canvasRef} className="particle-field" aria-hidden="true" />
-  )
+    sceneMounted = true
+    void import("~/lib/particle-scene").then(({ mountParticleScene }) => {
+      if (persistentCanvas) {
+        mountParticleScene(persistentCanvas)
+      }
+    })
+  }, [hidden])
+
+  return null
 }

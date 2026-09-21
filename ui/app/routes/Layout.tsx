@@ -87,7 +87,7 @@ export default function Layout() {
         </div>
       </header>
       <main className="site-main">
-        {pathname !== "/ship" ? <ParticleField /> : null}
+        <ParticleField hidden={pathname === "/ship"} />
         <div className="site-content">
           <Outlet />
         </div>

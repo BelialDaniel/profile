@@ -9,8 +9,9 @@ export type ShipModel = {
   dispose: () => void
 }
 
-export function createShip(): ShipModel {
+export function createShip(scale = 1): ShipModel {
   const group = new THREE.Group()
+  group.scale.setScalar(scale)
   const geometries: THREE.BufferGeometry[] = []
   const materials: THREE.Material[] = []
 

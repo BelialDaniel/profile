@@ -1,19 +1,18 @@
 import * as THREE from "three"
 import { createShip } from "~/lib/create-ship"
+import {
+  createDynamicTrail,
+  seedTrail,
+  updateTrail,
+} from "~/lib/ship-trails"
 
 const STAR_COUNT = 900
 const STAR_SPEED = 11.2
 const Z_NEAR = 8
 const Z_FAR = -80
-const TRAIL_SEGMENTS = 24
-const TRAIL_WIDTH = 0.07
-const TRAIL_LENGTH = 1.55
 const SHIP_LERP = 0.09
 const SHIP_RANGE_X = 1.7
 const SHIP_RANGE_Y = 1.05
-const trailTangent = new THREE.Vector3()
-const trailSide = new THREE.Vector3()
-const trailUp = new THREE.Vector3(0, 1, 0)
 const trailBack = new THREE.Vector3()
 
 export function mountShipLabScene(canvas: HTMLCanvasElement) {
@@ -41,7 +40,7 @@ export function mountShipLabScene(canvas: HTMLCanvasElement) {
   rimLight.position.set(-3.2, 1.2, -4)
   scene.add(rimLight)
 
-  const ship = createShip()
+  const ship = createShip(1)
   scene.add(ship.group)
 
   const leftTrail = createDynamicTrail()
@@ -191,111 +190,4 @@ function createStarField() {
     positionAttr,
     recycleStar: placeStar,
   }
-}
-
-function createDynamicTrail() {
-  const history = Array.from(
-    { length: TRAIL_SEGMENTS },
-    () => new THREE.Vector3(),
-  )
-  const vertexCount = TRAIL_SEGMENTS * 2
-  const positions = new Float32Array(vertexCount * 3)
-  const colors = new Float32Array(vertexCount * 3)
-  const indices: number[] = []
-
-  for (let i = 0; i < TRAIL_SEGMENTS; i++) {
-    const fade = 1 - i / (TRAIL_SEGMENTS - 1)
-    for (let side = 0; side < 2; side++) {
-      const i3 = (i * 2 + side) * 3
-      colors[i3] = 0.58 * fade
-      colors[i3 + 1] = 0.88 * fade
-      colors[i3 + 2] = 1 * fade
-    }
-  }
-
-  for (let i = 0; i < TRAIL_SEGMENTS - 1; i++) {
-    const a = i * 2
-    indices.push(a, a + 1, a + 2, a + 1, a + 3, a + 2)
-  }
-
-  const geometry = new THREE.BufferGeometry()
-  const positionAttr = new THREE.BufferAttribute(positions, 3)
-  geometry.setAttribute("position", positionAttr)
-  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3))
-  geometry.setIndex(indices)
-
-  const material = new THREE.MeshBasicMaterial({
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.55,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-  })
-
-  return {
-    mesh: new THREE.Mesh(geometry, material),
-    history,
-    positions,
-    positionAttr,
-    dispose() {
-      geometry.dispose()
-      material.dispose()
-    },
-  }
-}
-
-function seedTrail(
-  trail: ReturnType<typeof createDynamicTrail>,
-  nozzle: THREE.Vector3,
-) {
-  for (let i = 0; i < TRAIL_SEGMENTS; i++) {
-    trail.history[i].copy(nozzle)
-  }
-}
-
-function updateTrail(
-  trail: ReturnType<typeof createDynamicTrail>,
-  nozzle: THREE.Vector3,
-  back: THREE.Vector3,
-) {
-  for (let i = TRAIL_SEGMENTS - 1; i > 0; i--) {
-    trail.history[i].copy(trail.history[i - 1])
-  }
-  trail.history[0].copy(nozzle)
-
-  for (let i = 0; i < TRAIL_SEGMENTS; i++) {
-    const t = i / (TRAIL_SEGMENTS - 1)
-    const lagged = trail.history[i]
-    const x = nozzle.x + back.x * t * TRAIL_LENGTH + (nozzle.x - lagged.x) * 2.6
-    const y = nozzle.y + back.y * t * TRAIL_LENGTH + (nozzle.y - lagged.y) * 2.6
-    const z = nozzle.z + back.z * t * TRAIL_LENGTH
-    trailTangent.copy(back)
-
-    if (trailTangent.lengthSq() < 0.000001) {
-      trailTangent.set(0, 0, 1)
-    } else {
-      trailTangent.normalize()
-    }
-
-    trailSide.crossVectors(trailTangent, trailUp)
-    if (trailSide.lengthSq() < 0.000001) {
-      trailSide.set(1, 0, 0)
-    } else {
-      trailSide.normalize()
-    }
-
-    const halfWidth = TRAIL_WIDTH * (1 - t * 0.45) * 0.5
-    const left = i * 6
-    const right = left + 3
-
-    trail.positions[left] = x - trailSide.x * halfWidth
-    trail.positions[left + 1] = y - trailSide.y * halfWidth
-    trail.positions[left + 2] = z - trailSide.z * halfWidth
-    trail.positions[right] = x + trailSide.x * halfWidth
-    trail.positions[right + 1] = y + trailSide.y * halfWidth
-    trail.positions[right + 2] = z + trailSide.z * halfWidth
-  }
-
-  trail.positionAttr.needsUpdate = true
 }

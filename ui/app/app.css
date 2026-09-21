@@ -50,6 +50,10 @@ a {
   pointer-events: none;
 }
 
+.particle-field.is-hidden {
+  visibility: hidden;
+}
+
 .ship-lab {
   position: relative;
   min-height: calc(100vh - 4.5rem);
