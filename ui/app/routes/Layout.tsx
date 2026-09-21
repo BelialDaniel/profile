@@ -1,6 +1,7 @@
 import type { Route } from "./+types/Layout"
 import { NavLink, Outlet } from "react-router"
 import { useTranslation } from "react-i18next"
+import { ParticleField } from "~/components/ParticleField"
 import {
   languageLabels,
   supportedLanguages,
@@ -84,8 +85,11 @@ export default function Layout() {
           </div>
         </div>
       </header>
-      <main>
-        <Outlet />
+      <main className="site-main">
+        <ParticleField />
+        <div className="site-content">
+          <Outlet />
+        </div>
       </main>
     </div>
   )
