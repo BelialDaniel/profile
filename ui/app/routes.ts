@@ -6,5 +6,6 @@ export default [
     route("experience", "routes/Experience.tsx"),
     route("projects", "routes/Projects.tsx"),
     route("contact", "routes/Contact.tsx"),
+    route("ship", "routes/ShipLab.tsx"),
   ]),
 ] satisfies RouteConfig

@@ -1,5 +1,5 @@
 import type { Route } from "./+types/Layout"
-import { NavLink, Outlet } from "react-router"
+import { NavLink, Outlet, useLocation } from "react-router"
 import { useTranslation } from "react-i18next"
 import { ParticleField } from "~/components/ParticleField"
 import {
@@ -33,6 +33,7 @@ export default function Layout() {
   const { t } = useTranslation()
   const language = useLanguageStore((state) => state.language)
   const setLanguage = useLanguageStore((state) => state.setLanguage)
+  const { pathname } = useLocation()
 
   return (
     <div className="app">
@@ -86,7 +87,7 @@ export default function Layout() {
         </div>
       </header>
       <main className="site-main">
-        <ParticleField />
+        {pathname !== "/ship" ? <ParticleField /> : null}
         <div className="site-content">
           <Outlet />
         </div>

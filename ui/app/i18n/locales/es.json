@@ -118,5 +118,8 @@
     "githubLabel": "GitHub",
     "gitlabLabel": "GitLab",
     "cursorLabel": "Cursor"
+  },
+  "shipLab": {
+    "title": "Laboratorio de nave"
   }
 }
