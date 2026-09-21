@@ -6,6 +6,9 @@ const CAMERA_Z = 68
 const MAX_OFFSET_X = 12
 const MAX_OFFSET_Y = 7
 const LERP = 0.016
+const STAR_SPEED = 11.2
+const Z_NEAR = CAMERA_Z - 10
+const Z_FAR = -FIELD.z
 
 export function mountParticleScene(canvas: HTMLCanvasElement) {
   const scene = new THREE.Scene()
@@ -49,8 +52,10 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
   }
 
   const geometry = new THREE.BufferGeometry()
-  geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3))
-  geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3))
+  const positionAttr = new THREE.BufferAttribute(positions, 3)
+  const colorAttr = new THREE.BufferAttribute(colors, 3)
+  geometry.setAttribute("position", positionAttr)
+  geometry.setAttribute("color", colorAttr)
 
   const material = new THREE.PointsMaterial({
     size: 1.85,
@@ -88,12 +93,47 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
   resizeObserver.observe(canvas)
   setSize()
 
+  const clock = new THREE.Clock()
+
+  const recycleStar = (index: number) => {
+    const i3 = index * 3
+    positions[i3] = (Math.random() - 0.5) * FIELD.x * 2
+    positions[i3 + 1] = (Math.random() - 0.5) * FIELD.y * 2
+    positions[i3 + 2] = Z_FAR - Math.random() * 24
+
+    const color = sunColors[Math.floor(Math.random() * sunColors.length)].clone()
+    color.offsetHSL(0, (Math.random() - 0.5) * 0.06, (Math.random() - 0.5) * 0.08)
+    colors[i3] = color.r
+    colors[i3 + 1] = color.g
+    colors[i3 + 2] = color.b
+  }
+
   renderer.setAnimationLoop(() => {
+    const delta = Math.min(clock.getDelta(), 0.05)
+
     if (!reducedMotion) {
       const targetX = -pointer.x * MAX_OFFSET_X
       const targetY = pointer.y * MAX_OFFSET_Y
       camera.position.x += (targetX - camera.position.x) * LERP
       camera.position.y += (targetY - camera.position.y) * LERP
+
+      let recycled = false
+      const step = STAR_SPEED * delta
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const zIndex = i * 3 + 2
+        positions[zIndex] += step
+
+        if (positions[zIndex] > Z_NEAR) {
+          recycleStar(i)
+          recycled = true
+        }
+      }
+
+      positionAttr.needsUpdate = true
+      if (recycled) {
+        colorAttr.needsUpdate = true
+      }
     }
 
     camera.lookAt(0, 0, 0)
