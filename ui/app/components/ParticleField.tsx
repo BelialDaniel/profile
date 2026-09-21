@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react"
 
 export function ParticleField() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+    const canvas = canvasRef.current
+    if (!canvas) return
 
     let disposed = false
     let dispose: (() => void) | undefined
 
     void import("~/lib/particle-scene").then(({ mountParticleScene }) => {
-      if (disposed || !containerRef.current) return
-      dispose = mountParticleScene(container)
+      if (disposed || !canvasRef.current) return
+      dispose = mountParticleScene(canvas)
     })
 
     return () => {
@@ -21,5 +21,7 @@ export function ParticleField() {
     }
   }, [])
 
-  return <div ref={containerRef} className="particle-field" aria-hidden="true" />
+  return (
+    <canvas ref={canvasRef} className="particle-field" aria-hidden="true" />
+  )
 }

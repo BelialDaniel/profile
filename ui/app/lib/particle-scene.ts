@@ -3,11 +3,11 @@ import * as THREE from "three"
 const PARTICLE_COUNT = 2600
 const FIELD = { x: 96, y: 58, z: 150 }
 const CAMERA_Z = 68
-const MAX_OFFSET_X = 28
-const MAX_OFFSET_Y = 16
-const LERP = 0.06
+const MAX_OFFSET_X = 12
+const MAX_OFFSET_Y = 7
+const LERP = 0.016
 
-export function mountParticleScene(container: HTMLElement) {
+export function mountParticleScene(canvas: HTMLCanvasElement) {
   const scene = new THREE.Scene()
   scene.background = new THREE.Color(0x000000)
   scene.fog = new THREE.FogExp2(0x000000, 0.011)
@@ -16,14 +16,13 @@ export function mountParticleScene(container: HTMLElement) {
   camera.position.set(0, 0, CAMERA_Z)
 
   const renderer = new THREE.WebGLRenderer({
+    canvas,
     antialias: true,
     alpha: false,
     powerPreference: "high-performance",
   })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.setClearColor(0x000000, 1)
-  renderer.domElement.className = "particle-field__canvas"
-  container.appendChild(renderer.domElement)
 
   const texture = createSoftCircleTexture()
   const positions = new Float32Array(PARTICLE_COUNT * 3)
@@ -71,16 +70,16 @@ export function mountParticleScene(container: HTMLElement) {
   }
 
   const setSize = () => {
-    const width = container.clientWidth || window.innerWidth
-    const height = container.clientHeight || window.innerHeight
+    const width = canvas.clientWidth || window.innerWidth
+    const height = canvas.clientHeight || window.innerHeight
     camera.aspect = width / height
     camera.updateProjectionMatrix()
-    renderer.setSize(width, height)
+    renderer.setSize(width, height, false)
   }
 
   window.addEventListener("pointermove", onPointerMove, { passive: true })
   const resizeObserver = new ResizeObserver(setSize)
-  resizeObserver.observe(container)
+  resizeObserver.observe(canvas)
   setSize()
 
   renderer.setAnimationLoop(() => {
@@ -103,7 +102,6 @@ export function mountParticleScene(container: HTMLElement) {
     material.dispose()
     texture.dispose()
     renderer.dispose()
-    renderer.domElement.remove()
   }
 }
 
