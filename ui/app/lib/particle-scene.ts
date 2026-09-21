@@ -27,8 +27,13 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
   const texture = createSoftCircleTexture()
   const positions = new Float32Array(PARTICLE_COUNT * 3)
   const colors = new Float32Array(PARTICLE_COUNT * 3)
-  const accent = new THREE.Color(0x7dd3fc)
-  const white = new THREE.Color(0xf7fbff)
+  const sunColors = [
+    new THREE.Color(0x5aa8ff),
+    new THREE.Color(0xfff4e0),
+    new THREE.Color(0xffc53d),
+    new THREE.Color(0xff8c3a),
+    new THREE.Color(0xff4d3a),
+  ]
 
   for (let i = 0; i < PARTICLE_COUNT; i++) {
     const i3 = i * 3
@@ -36,7 +41,8 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
     positions[i3 + 1] = (Math.random() - 0.5) * FIELD.y * 2
     positions[i3 + 2] = (Math.random() - 0.5) * FIELD.z * 2
 
-    const color = white.clone().lerp(accent, Math.random() * 0.55)
+    const color = sunColors[i % sunColors.length].clone()
+    color.offsetHSL(0, (Math.random() - 0.5) * 0.06, (Math.random() - 0.5) * 0.08)
     colors[i3] = color.r
     colors[i3 + 1] = color.g
     colors[i3 + 2] = color.b
@@ -47,11 +53,11 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
   geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3))
 
   const material = new THREE.PointsMaterial({
-    size: 1.4,
+    size: 1.85,
     map: texture,
     vertexColors: true,
     transparent: true,
-    opacity: 0.92,
+    opacity: 0.95,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
     sizeAttenuation: true,
@@ -118,8 +124,9 @@ function createSoftCircleTexture() {
 
   const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
   gradient.addColorStop(0, "rgba(255,255,255,1)")
-  gradient.addColorStop(0.35, "rgba(210,230,255,0.42)")
-  gradient.addColorStop(1, "rgba(255,255,255,0)")
+  gradient.addColorStop(0.18, "rgba(255,244,210,0.95)")
+  gradient.addColorStop(0.42, "rgba(255,210,120,0.38)")
+  gradient.addColorStop(1, "rgba(255,180,80,0)")
   ctx.fillStyle = gradient
   ctx.fillRect(0, 0, size, size)
 
