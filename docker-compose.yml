@@ -1,5 +1,5 @@
 services:
-  ui:
+  profile:
     build:
       context: .
       dockerfile: Dockerfile.ui

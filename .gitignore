@@ -3,3 +3,9 @@
 .vscode
 */.vscode
 
+.pnpm-store
+.pnpm-store/*
+
+ui/node_modules
+ui/node_modules/*
+
