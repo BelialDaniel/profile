@@ -6,18 +6,23 @@ echo "$APP_DIR init..."
 echo "Installing pnpm globally..."
 npm install -g pnpm
 
-if [ ! -d "$APP_DIR" ]; then
-    echo "Creating ui folder $APP_DIR ..."
-    mkdir -p $APP_DIR
+mkdir -p "$APP_DIR"
 
-    echo "Creating ui app"
-    npx sv create ui --template minimal --types ts --no-add-ons
+if [ ! -f "$APP_DIR/package.json" ]; then
+    echo "Creating React Router app"
+    npx --yes create-react-router@latest "$APP_DIR" \
+        --yes \
+        --template remix-run/react-router-templates/default \
+        --no-git-init \
+        --no-install \
+        --no-agent-skills \
+        --package-manager pnpm
 fi
 
-cd ui
+cd "$APP_DIR"
 
 echo "Installing dependencies with pnpm"
 pnpm install
 
 echo "Running dev server with pnpm"
-pnpm run dev
+pnpm dev --host 0.0.0.0

@@ -1,3 +1,5 @@
-FROM node:latest
+FROM node:25-alpine3.22
 
-COPY . .
+RUN npm install -g pnpm && apk add --no-cache bash git
+
+WORKDIR /opt/ui

@@ -1,10 +1,12 @@
-.env
-.env.*
-!.env.example
-
+.git
 .vscode
 .idea
 .DS_Store
+
+.env
+.env.*
+
+README.md
 
 .pnpm-store
 node_modules
@@ -14,5 +16,3 @@ pnpm-debug.log*
 ui/node_modules
 ui/.react-router
 ui/build
-
-.DS_Store
