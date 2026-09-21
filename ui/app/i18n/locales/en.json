@@ -1,0 +1,9 @@
+{
+  "nav": {
+    "home": "Home",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Home"
+  }
+}
