@@ -1,9 +1,122 @@
 {
   "nav": {
-    "home": "Home",
+    "about": "About",
+    "experience": "Background",
+    "projects": "Projects",
+    "contact": "Contact",
     "language": "Language"
   },
-  "home": {
-    "title": "Home"
+  "brand": "Daniel Morales",
+  "about": {
+    "name": "Daniel Alberto Maldonado Morales",
+    "role": "Full Stack Developer",
+    "location": "Guadalajara, Mexico",
+    "bio": "Full Stack Developer based in Guadalajara with 7+ years of experience building scalable applications. Automating large-scale processes, and implementing robust algorithms and architectural design patterns. Most recently focused on integrating AI capabilities and Stripe architectures to build modern payment services.",
+    "skillsTitle": "Stack",
+    "skillGroups": [
+      {
+        "title": "Frameworks",
+        "items": ["Django", "Vue", "React", "Svelte"]
+      },
+      {
+        "title": "Languages",
+        "items": ["Python", "TypeScript", "JavaScript", "Java"]
+      },
+      {
+        "title": "AI",
+        "items": ["Cursor", "Claude Code", "MCP", "Gemini"]
+      }
+    ]
+  },
+  "experience": {
+    "title": "Background",
+    "workTitle": "Work",
+    "educationTitle": "Education",
+    "jobs": [
+      {
+        "role": "Full Stack Developer with AI",
+        "company": "The Lacanians",
+        "period": "Present",
+        "description": "As a collaborator at The Lacanians, I engineer scalable backend systems and complex integrations. Together, we transform fragile AI prototypes and MVPs into robust, production-ready software that teams can confidently own.",
+        "points": [
+          "Cartographer: an evidence-first control plane designed to track and optimize a brand's visibility across AI search surfaces.",
+          "ClipIt: a semantic retrieval application that extracts precise moments from long-form video and provides a clear rationale for every match."
+        ],
+        "tech": ["Django", "Vue", "React", "Python", "TypeScript", "Cursor"]
+      },
+      {
+        "role": "Full Stack Developer",
+        "company": "Cecilians Partners",
+        "period": "Jun 2019 – Jul 2025",
+        "description": "Developed and maintained TheXO, a real estate application for homebuilders and developers. Promoted to Team Lead to guide developers, oversee application maintenance, and streamline new feature deployment.",
+        "points": [],
+        "tech": ["Python", "Django", "React", "Vue", "DigitalOcean", "GitLab CI/CD"]
+      },
+      {
+        "role": "Java Developer",
+        "company": "Deda Group",
+        "period": "Oct 2017 – Jun 2019",
+        "description": "Built and deployed custom applications for financial clients using an internal Java framework. Later promoted to the core engineering team to maintain and optimize the framework used by credit unions across Mexico, the USA, and Italy.",
+        "points": [],
+        "tech": ["Java", "Design Patterns", "SOLID", "SVN"]
+      }
+    ],
+    "studies": [
+      {
+        "degree": "Master's Degree in Electrical Engineering",
+        "school": "Instituto Tecnológico de la Laguna",
+        "detail": "Thesis: Development of a Monitoring System for Wind Turbine Engines. Focused on hardware and software integration, specialized algorithms, and microcontroller programming for real-time telemetry and engine monitoring.",
+        "tech": ["C", "MatLab", "DAQ", "PICs", "dsPICs"]
+      },
+      {
+        "degree": "Bachelor's Degree in Computer Systems Engineering",
+        "school": "Instituto Tecnológico de La Laguna",
+        "detail": "Focused on software development, core computer science principles, and robust algorithmic problem-solving.",
+        "tech": []
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "items": [
+      {
+        "name": "nvito.io",
+        "role": "Founder",
+        "url": "https://nvito.io",
+        "description": "An electronic invitation platform featuring AI-generated video covers and guest management systems.",
+        "tech": ["Svelte", "Django", "Gemini", "Stripe"]
+      },
+      {
+        "name": "Cartographer",
+        "role": "The Lacanians",
+        "url": "https://cartographer.tools",
+        "description": "An evidence-first control plane designed to track and optimize a brand's visibility across AI search surfaces.",
+        "tech": ["Cursor", "AI"]
+      },
+      {
+        "name": "ClipIt",
+        "role": "The Lacanians",
+        "url": "https://www.clipit.now",
+        "description": "A semantic retrieval application that extracts precise, relevant moments from long-form video content while providing a clear rationale for every match.",
+        "tech": ["AI", "Retrieval"]
+      },
+      {
+        "name": "TheXO",
+        "role": "Cecilians Partners",
+        "url": "",
+        "description": "A real estate application for homebuilders and developers. Led the team, application maintenance, and new feature deployment.",
+        "tech": ["Python", "Django", "React", "Vue"]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "If you want to talk about a project, an integration, or an idea, get in touch.",
+    "emailLabel": "Email",
+    "email": "m.morales.daniel@gmail.com",
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "gitlabLabel": "GitLab",
+    "cursorLabel": "Cursor"
   }
 }

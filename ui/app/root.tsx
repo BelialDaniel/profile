@@ -26,7 +26,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const language = useLanguageStore((state) => state.language)
 
   return (
-    <html lang={language}>
+    <html lang={language} className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

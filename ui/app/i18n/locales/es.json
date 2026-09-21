@@ -1,9 +1,122 @@
 {
   "nav": {
-    "home": "Inicio",
+    "about": "Sobre",
+    "experience": "Trayectoria",
+    "projects": "Proyectos",
+    "contact": "Contacto",
     "language": "Idioma"
   },
-  "home": {
-    "title": "Inicio"
+  "brand": "Daniel Morales",
+  "about": {
+    "name": "Daniel Alberto Maldonado Morales",
+    "role": "Desarrollador Full Stack",
+    "location": "Guadalajara, México",
+    "bio": "Desarrollador Full Stack con más de 7 años de experiencia construyendo aplicaciones escalables. Automatizo procesos a gran escala e implemento algoritmos robustos y patrones de diseño arquitectónico. Recientemente me he enfocado en integrar capacidades de IA y arquitecturas de Stripe para construir servicios de pago modernos.",
+    "skillsTitle": "Stack",
+    "skillGroups": [
+      {
+        "title": "Frameworks",
+        "items": ["Django", "Vue", "React", "Svelte"]
+      },
+      {
+        "title": "Lenguajes",
+        "items": ["Python", "TypeScript", "JavaScript", "Java"]
+      },
+      {
+        "title": "IA",
+        "items": ["Cursor", "Claude Code", "MCP", "Gemini"]
+      }
+    ]
+  },
+  "experience": {
+    "title": "Trayectoria",
+    "workTitle": "Trabajo",
+    "educationTitle": "Formación",
+    "jobs": [
+      {
+        "role": "Full Stack Developer with AI",
+        "company": "The Lacanians",
+        "period": "Actual",
+        "description": "Como colaborador en The Lacanians, diseño sistemas backend escalables e integraciones complejas. Juntos transformamos prototipos de IA y MVPs frágiles en software de producción que los equipos pueden mantener con confianza.",
+        "points": [
+          "Cartographer: control plane basado en evidencia para rastrear y optimizar la visibilidad de una marca en superficies de búsqueda de IA.",
+          "ClipIt: aplicación de recuperación semántica que extrae momentos precisos de video de formato largo y justifica cada coincidencia."
+        ],
+        "tech": ["Django", "Vue", "React", "Python", "TypeScript", "Cursor"]
+      },
+      {
+        "role": "Full Stack Developer",
+        "company": "Cecilians Partners",
+        "period": "Jun 2019 – Jul 2025",
+        "description": "Desarrollé y mantuve TheXO, una aplicación inmobiliaria para constructoras y desarrolladores. Fui promovido a Team Lead para guiar al equipo, supervisar el mantenimiento de la aplicación y agilizar el despliegue de nuevas funcionalidades.",
+        "points": [],
+        "tech": ["Python", "Django", "React", "Vue", "DigitalOcean", "GitLab CI/CD"]
+      },
+      {
+        "role": "Java Developer",
+        "company": "Deda Group",
+        "period": "Oct 2017 – Jun 2019",
+        "description": "Construí y desplegué aplicaciones a la medida para clientes del sector financiero usando un framework interno de Java. Más adelante fui promovido al equipo de ingeniería core para mantener y optimizar el framework usado por uniones de crédito en México, EUA e Italia.",
+        "points": [],
+        "tech": ["Java", "Patrones de diseño", "SOLID", "SVN"]
+      }
+    ],
+    "studies": [
+      {
+        "degree": "Maestría en Ingeniería Eléctrica",
+        "school": "Instituto Tecnológico de la Laguna",
+        "detail": "Tesis: Desarrollo de un sistema de monitoreo para motores de turbinas eólicas. Integración de hardware y software, algoritmos especializados y programación de microcontroladores para telemetría en tiempo real.",
+        "tech": ["C", "MatLab", "DAQ", "PICs", "dsPICs"]
+      },
+      {
+        "degree": "Ingeniería en Sistemas Computacionales",
+        "school": "Instituto Tecnológico de La Laguna",
+        "detail": "Enfoque en desarrollo de software, fundamentos de ciencias de la computación y resolución de problemas con algoritmos robustos.",
+        "tech": []
+      }
+    ]
+  },
+  "projects": {
+    "title": "Proyectos",
+    "items": [
+      {
+        "name": "nvito.io",
+        "role": "Fundador",
+        "url": "https://nvito.io",
+        "description": "Plataforma de invitaciones electrónicas con portadas de video generadas por IA y sistema de gestión de invitados.",
+        "tech": ["Svelte", "Django", "Gemini", "Stripe"]
+      },
+      {
+        "name": "Cartographer",
+        "role": "The Lacanians",
+        "url": "https://cartographer.tools",
+        "description": "Control plane basado en evidencia para rastrear y optimizar la visibilidad de una marca en superficies de búsqueda de IA.",
+        "tech": ["Cursor", "IA"]
+      },
+      {
+        "name": "ClipIt",
+        "role": "The Lacanians",
+        "url": "https://www.clipit.now",
+        "description": "Aplicación de recuperación semántica que extrae momentos precisos y relevantes de video de formato largo, con una justificación clara para cada coincidencia.",
+        "tech": ["IA", "Retrieval"]
+      },
+      {
+        "name": "TheXO",
+        "role": "Cecilians Partners",
+        "url": "",
+        "description": "Aplicación inmobiliaria para constructoras y desarrolladores. Lideré al equipo, el mantenimiento y el despliegue de nuevas funcionalidades.",
+        "tech": ["Python", "Django", "React", "Vue"]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contacto",
+    "intro": "Si quieres platicar de un proyecto, una integración o una idea, escríbeme.",
+    "emailLabel": "Correo",
+    "email": "m.morales.daniel@gmail.com",
+    "linkedinLabel": "LinkedIn",
+    "githubLabel": "GitHub",
+    "gitlabLabel": "GitLab",
+    "cursorLabel": "Cursor"
   }
 }

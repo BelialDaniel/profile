@@ -1,17 +1,30 @@
 import type { Route } from "./+types/Layout"
-import { Link, Outlet } from "react-router"
+import { NavLink, Outlet } from "react-router"
 import { useTranslation } from "react-i18next"
 import {
-  isLanguage,
   languageLabels,
   supportedLanguages,
 } from "~/i18n/config"
 import { useLanguageStore } from "~/stores/language"
 
+const navItems: Array<{
+  to: string
+  key: "nav.about" | "nav.experience" | "nav.projects" | "nav.contact"
+  end?: boolean
+}> = [
+  { to: "/", key: "nav.about", end: true },
+  { to: "/experience", key: "nav.experience" },
+  { to: "/projects", key: "nav.projects" },
+  { to: "/contact", key: "nav.contact" },
+]
+
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "BelialDaniel" },
-    { name: "description", content: "Welcome to my profile!" },
+    { title: "Daniel Morales" },
+    {
+      name: "description",
+      content: "Full Stack Developer based in Guadalajara.",
+    },
   ]
 }
 
@@ -21,36 +34,59 @@ export default function Layout() {
   const setLanguage = useLanguageStore((state) => state.setLanguage)
 
   return (
-    <>
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">{t("nav.home")}</Link>
-            </li>
-          </ul>
-        </nav>
-        <label>
-          {t("nav.language")}
-          <select
-            value={language}
-            onChange={(event) => {
-              if (isLanguage(event.target.value)) {
-                setLanguage(event.target.value)
-              }
-            }}
+    <div className="app">
+      <header className="site-header">
+        <div className="site-header__inner">
+          <NavLink
+            to="/"
+            end
+            viewTransition
+            className="site-brand"
+            aria-label={t("brand")}
           >
-            {supportedLanguages.map((lng) => (
-              <option key={lng} value={lng}>
-                {languageLabels[lng]}
-              </option>
-            ))}
-          </select>
-        </label>
+            <span className="site-brand__mark" aria-hidden="true">
+              BD
+            </span>
+          </NavLink>
+          <div className="site-header__right">
+            <nav className="site-nav" aria-label="Primary">
+              <ul>
+                {navItems.map((item) => (
+                  <li key={item.to}>
+                    <NavLink
+                      to={item.to}
+                      end={item.end}
+                      viewTransition
+                      className={({ isActive }) =>
+                        isActive ? "site-nav__btn is-active" : "site-nav__btn"
+                      }
+                    >
+                      {t(item.key)}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="language-switcher" role="group" aria-label={t("nav.language")}>
+              {supportedLanguages.map((lng) => (
+                <button
+                  key={lng}
+                  type="button"
+                  className={language === lng ? "is-active" : undefined}
+                  aria-pressed={language === lng}
+                  aria-label={languageLabels[lng]}
+                  onClick={() => setLanguage(lng)}
+                >
+                  {lng.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </header>
       <main>
         <Outlet />
       </main>
-    </>
+    </div>
   )
 }
