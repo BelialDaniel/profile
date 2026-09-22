@@ -272,7 +272,8 @@ a {
   font-weight: 600;
 }
 
-.card h2 a {
+.card h2 a,
+.card h3 a {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -286,7 +287,8 @@ a {
   flex-shrink: 0;
 }
 
-.card h2 a:hover {
+.card h2 a:hover,
+.card h3 a:hover {
   color: #f4fbff;
   text-shadow:
     0 0 6px rgba(255, 255, 255, 0.7),

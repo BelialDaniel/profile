@@ -2,7 +2,7 @@
   "nav": {
     "about": "About",
     "experience": "Background",
-    "projects": "Projects",
+    "projects": "Experience",
     "contact": "Contact",
     "language": "Language"
   },
@@ -77,41 +77,57 @@
     ]
   },
   "projects": {
-    "title": "Projects",
-    "items": [
+    "title": "Experience",
+    "sections": [
       {
-        "name": "nvito.io",
-        "role": "Founder",
-        "url": "https://nvito.io",
-        "description": "An electronic invitation platform featuring AI-generated video covers and guest management systems.",
-        "tech": ["Svelte", "Django", "Gemini", "Stripe"]
+        "title": "Personal projects",
+        "items": [
+          {
+            "name": "nvito.io",
+            "role": "Founder",
+            "url": "https://nvito.io",
+            "description": "An electronic invitation platform featuring AI-generated video covers and guest management systems.",
+            "tech": ["Svelte", "Django", "Gemini", "Stripe"]
+          }
+        ]
       },
       {
-        "name": "Cartographer",
-        "role": "The Lacanians",
-        "url": "https://cartographer.tools",
-        "description": "An evidence-first control plane designed to track and optimize a brand's visibility across AI search surfaces.",
-        "tech": ["Cursor", "AI"]
+        "title": "Collaborations",
+        "items": [
+          {
+            "name": "Cartographer",
+            "role": "The Lacanians",
+            "url": "https://cartographer.tools",
+            "description": "An evidence-first control plane designed to track and optimize a brand's visibility across AI search surfaces.",
+            "tech": ["Cursor", "AI"]
+          },
+          {
+            "name": "ClipIt",
+            "role": "The Lacanians",
+            "url": "https://www.clipit.now",
+            "description": "A semantic retrieval application that extracts precise, relevant moments from long-form video content while providing a clear rationale for every match.",
+            "tech": ["AI", "Retrieval"]
+          }
+        ]
       },
       {
-        "name": "ClipIt",
-        "role": "The Lacanians",
-        "url": "https://www.clipit.now",
-        "description": "A semantic retrieval application that extracts precise, relevant moments from long-form video content while providing a clear rationale for every match.",
-        "tech": ["AI", "Retrieval"]
-      },
-      {
-        "name": "TheXO",
-        "role": "Cecilians Partners",
-        "url": "",
-        "description": "A real estate application for homebuilders and developers. Led the team, application maintenance, and new feature deployment.",
-        "tech": ["Python", "Django", "React", "Vue"]
+        "title": "Works",
+        "items": [
+          {
+            "name": "TheXO",
+            "role": "Cecilians Partners",
+            "url": "",
+            "description": "A real estate application for homebuilders and developers. Led the team, application maintenance, and new feature deployment.",
+            "tech": ["Python", "Django", "React", "Vue"]
+          }
+        ]
       }
     ]
   },
   "contact": {
     "title": "Contact",
     "intro": "If you want to talk about a project, an integration, or an idea, get in touch.",
+    "body": "I'm always open to discussing scalable architectures, complex API integrations, or backend engineering challenges. Whether you're building event-driven systems, optimizing data pipelines, or looking for a Senior Software Engineer to strengthen your team, let's connect.",
     "emailLabel": "Email",
     "email": "m.morales.daniel@gmail.com",
     "linkedinLabel": "LinkedIn",

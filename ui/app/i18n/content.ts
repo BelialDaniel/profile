@@ -20,6 +20,11 @@ export type Project = {
   tech: string[]
 }
 
+export type ProjectSection = {
+  title: string
+  items: Project[]
+}
+
 export type EducationItem = {
   degree: string
   school: string

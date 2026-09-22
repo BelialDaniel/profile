@@ -26,6 +26,7 @@ export default function Contact() {
     <section className="page">
       <h1>{t("contact.title")}</h1>
       <p>{t("contact.intro")}</p>
+      <p>{t("contact.body")}</p>
       <p className="contact-email">
         <a href={`mailto:${t("contact.email")}`}>{t("contact.email")}</a>
         <span>{t("contact.emailLabel")}</span>
