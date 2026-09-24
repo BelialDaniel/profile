@@ -6,7 +6,7 @@ import {
   updateTrail,
 } from "~/lib/ship-trails"
 
-const PARTICLE_COUNT = 2000
+const PARTICLE_COUNT = 1500
 const FIELD = { x: 96, y: 58, z: 150 }
 const CAMERA_Z = 68
 const MAX_OFFSET_X = 12

@@ -18,6 +18,7 @@ export type Project = {
   url: string
   description: string
   tech: string[]
+  badge?: string
 }
 
 export type ProjectSection = {

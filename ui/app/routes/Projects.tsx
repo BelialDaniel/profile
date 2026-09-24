@@ -25,6 +25,7 @@ export default function Projects() {
 function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="card">
+      <div className="card__title">
       <h3>
         {project.url ? (
           <a href={project.url} target="_blank" rel="noreferrer">
@@ -48,6 +49,10 @@ function ProjectCard({ project }: { project: Project }) {
           project.name
         )}
       </h3>
+      {project.badge ? (
+        <span className="card__badge">{project.badge}</span>
+      ) : null}
+      </div>
       <p className="meta">{project.role}</p>
       <p>{project.description}</p>
       {project.tech.length > 0 ? (

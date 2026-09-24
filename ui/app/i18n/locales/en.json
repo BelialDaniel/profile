@@ -25,6 +25,10 @@
       {
         "title": "AI",
         "items": ["Cursor", "Claude Code", "MCP", "Gemini"]
+      },
+      {
+        "title": "Cloud",
+        "items": ["AWS", "S3", "EC2", "IAM", "DigitalOcean", "Droplets", "Spaces"]
       }
     ]
   },
@@ -87,7 +91,15 @@
             "role": "Founder",
             "url": "https://nvito.io",
             "description": "An electronic invitation platform featuring AI-generated video covers and guest management systems.",
-            "tech": ["Svelte", "Django", "Gemini", "Stripe"]
+            "tech": ["Svelte", "Django", "PostgreSQL", "Redis", "Gemini", "Stripe"]
+          },
+          {
+            "name": "Editorial",
+            "role": "Founder",
+            "badge": "On sale",
+            "url": "https://editorial.bdaniel.dev/",
+            "description": "A digital magazine with the newsroom on the same site: readers browse and subscribe; the staff writes, reviews, and publishes. One API and one web app. In production, nginx and Cloudflare sit in front of an EC2.",
+            "tech": ["FastAPI", "PostgreSQL", "Redis", "Dramatiq", "Stripe", "React", "React Router", "Zustand"]
           }
         ]
       },

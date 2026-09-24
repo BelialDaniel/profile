@@ -266,10 +266,34 @@ a {
   color: var(--text-muted);
 }
 
+.card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.4rem;
+}
+
 .card h3 {
   margin: 0 0 0.4rem;
   font-size: 1.15rem;
   font-weight: 600;
+}
+
+.card__title h3 {
+  margin: 0;
+}
+
+.card__badge {
+  flex-shrink: 0;
+  padding: 0.22rem 0.55rem;
+  color: #041018;
+  background: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 0 14px var(--glow);
 }
 
 .card h2 a,
