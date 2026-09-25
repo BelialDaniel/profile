@@ -16,3 +16,6 @@ ui/.react-router
 ui/build
 
 .DS_Store
+
+planning
+planning/
