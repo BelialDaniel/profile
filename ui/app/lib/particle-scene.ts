@@ -15,6 +15,15 @@ const LERP = 0.016
 const STAR_SPEED = 11.2
 const Z_NEAR = CAMERA_Z - 10
 const Z_FAR = -FIELD.z
+const BASE_SIZE = 1.85
+const BASE_OPACITY = 0.95
+const BASE_FOG = 0.011
+const FLASH_SIZE = 3.15
+const FLASH_OPACITY = 1
+const FLASH_BRIGHTNESS = 3.4
+const FLASH_FOG = 0.0016
+const FLASH_DURATION = 2.1
+const FLASH_HOLD = 0.2
 const SHIP_SCALE = 0.3
 const SHIP_DISTANCE = 6.2
 const INTRO_DELAY = 5
@@ -33,10 +42,14 @@ const WANDER_TARGETS = [
   new THREE.Vector3(0, 0, 2.3),
 ] as const
 
-export function mountParticleScene(canvas: HTMLCanvasElement) {
+export function mountParticleScene(
+  canvas: HTMLCanvasElement,
+  hooks?: { onReady?: (reveal: () => void) => void },
+) {
   const scene = new THREE.Scene()
   scene.background = new THREE.Color(0x000000)
-  scene.fog = new THREE.FogExp2(0x000000, 0.011)
+  const fog = new THREE.FogExp2(0x000000, BASE_FOG)
+  scene.fog = fog
 
   const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 400)
   camera.position.set(0, 0, CAMERA_Z)
@@ -81,11 +94,11 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
   geometry.setAttribute("color", colorAttr)
 
   const material = new THREE.PointsMaterial({
-    size: 1.85,
+    size: BASE_SIZE,
     map: texture,
     vertexColors: true,
     transparent: true,
-    opacity: 0.95,
+    opacity: 0,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
     sizeAttenuation: true,
@@ -158,6 +171,34 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
   let wanderReady = false
   let nextWanderAt = INTRO_DELAY + INTRO_DURATION + WANDER_INTERVAL
   let trailsSeeded = false
+  let revealed = false
+  let revealStart: number | null = null
+
+  const applyFlash = (settled: number) => {
+    const brightness = FLASH_BRIGHTNESS + (1 - FLASH_BRIGHTNESS) * settled
+    material.color.r = brightness
+    material.color.g = brightness
+    material.color.b = brightness
+    material.size = FLASH_SIZE + (BASE_SIZE - FLASH_SIZE) * settled
+    material.opacity = FLASH_OPACITY + (BASE_OPACITY - FLASH_OPACITY) * settled
+    fog.density = FLASH_FOG + (BASE_FOG - FLASH_FOG) * settled
+  }
+
+  const revealParticles = () => {
+    if (revealed) return
+    revealed = true
+
+    if (reducedMotion) {
+      material.color.setRGB(1, 1, 1)
+      material.size = BASE_SIZE
+      material.opacity = BASE_OPACITY
+      fog.density = BASE_FOG
+      return
+    }
+
+    revealStart = clock.elapsedTime
+    applyFlash(0)
+  }
 
   const recycleStar = (index: number) => {
     const i3 = index * 3
@@ -201,10 +242,29 @@ export function mountParticleScene(canvas: HTMLCanvasElement) {
       }
     }
 
+    if (revealStart !== null) {
+      const t = Math.min(1, (time - revealStart) / FLASH_DURATION)
+      const held = t <= FLASH_HOLD ? 0 : (t - FLASH_HOLD) / (1 - FLASH_HOLD)
+      applyFlash(smoothstep(held))
+      if (t >= 1) {
+        revealStart = null
+        material.color.setRGB(1, 1, 1)
+        material.size = BASE_SIZE
+        material.opacity = BASE_OPACITY
+        fog.density = BASE_FOG
+      }
+    }
+
     camera.lookAt(0, 0, 0)
     updateMainShip(time, delta)
     renderer.render(scene, camera)
   })
+
+  if (hooks?.onReady) {
+    hooks.onReady(revealParticles)
+  } else {
+    revealParticles()
+  }
 
   function updateMainShip(time: number, delta: number) {
     if (reducedMotion) {
