@@ -12,13 +12,22 @@ export type Job = {
   tech: string[]
 }
 
+export const projectStatuses = [
+  "under_construction",
+  "on_sale",
+  "refactoring",
+  "sold",
+] as const
+
+export type ProjectStatus = (typeof projectStatuses)[number]
+
 export type Project = {
   name: string
   role: string
   url: string
   description: string
   tech: string[]
-  badge?: string
+  status?: ProjectStatus
 }
 
 export type ProjectSection = {

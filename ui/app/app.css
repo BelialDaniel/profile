@@ -332,6 +332,24 @@ a {
   box-shadow: 0 0 14px var(--glow);
 }
 
+.card__badge--under_construction {
+  color: #1c1004;
+  background: #fb923c;
+  box-shadow: 0 0 14px rgba(251, 146, 60, 0.7);
+}
+
+.card__badge--refactoring {
+  color: #1c1402;
+  background: #f5c518;
+  box-shadow: 0 0 14px rgba(245, 197, 24, 0.7);
+}
+
+.card__badge--sold {
+  color: #04140c;
+  background: #86efac;
+  box-shadow: 0 0 14px rgba(134, 239, 172, 0.65);
+}
+
 .card h2 a,
 .card h3 a {
   display: inline-flex;

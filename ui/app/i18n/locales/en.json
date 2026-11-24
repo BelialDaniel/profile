@@ -82,6 +82,12 @@
   },
   "projects": {
     "title": "Experience",
+    "status": {
+      "under_construction": "Under construction",
+      "on_sale": "On sale",
+      "refactoring": "Working on v2",
+      "sold": "Sold"
+    },
     "sections": [
       {
         "title": "Personal projects",
@@ -89,15 +95,16 @@
           {
             "name": "nvito.io",
             "role": "Founder",
-            "url": "https://nvito.io",
+            "url": "",
+            "status": "refactoring",
             "description": "An electronic invitation platform featuring AI-generated video covers and guest management systems.",
             "tech": ["Svelte", "Django", "PostgreSQL", "Redis", "Gemini", "Stripe"]
           },
           {
             "name": "Editorial",
             "role": "Founder",
-            "badge": "On sale",
             "url": "https://editorial.bdaniel.dev/",
+            "status": "on_sale",
             "description": "A digital magazine with the newsroom on the same site: readers browse and subscribe; the staff writes, reviews, and publishes. One API and one web app. In production, nginx and Cloudflare sit in front of an EC2.",
             "tech": ["FastAPI", "PostgreSQL", "Redis", "Dramatiq", "Stripe", "React", "React Router", "Zustand"]
           }
